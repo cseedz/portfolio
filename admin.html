@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow,noarchive" />
+    <title>Admin | Charles Grenier</title>
+    <link rel="icon" type="image/svg+xml" href="./favicon.svg" />
+    <link rel="stylesheet" href="./styles.css?v=20260312-04" />
+    <link rel="stylesheet" href="./admin.css?v=20260312-04" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-shell">
+      <section id="admin-login" class="admin-login" aria-live="polite">
+        <h1>Connexion CMS</h1>
+        <label>
+          Identifiant
+          <input id="login-username" type="text" autocomplete="username" />
+        </label>
+        <label>
+          Mot de passe
+          <input id="login-password" type="password" autocomplete="current-password" />
+        </label>
+        <button id="login-submit" type="button">Se connecter</button>
+        <p id="login-status" class="admin-status"></p>
+      </section>
+
+      <header class="admin-header">
+        <div>
+          <p class="eyebrow">CMS secure</p>
+          <h1>Edition du portfolio</h1>
+        </div>
+        <div class="admin-header__actions">
+          <button type="button" id="logout-admin">Deconnexion</button>
+          <button type="button" id="reset-content">Reinitialiser</button>
+        </div>
+      </header>
+
+      <nav class="admin-nav" aria-label="Navigation CMS">
+        <a href="#section-typo">Typographie</a>
+        <a href="#section-footer">Bas de page</a>
+        <a href="#section-intro">À propos (texte)</a>
+        <a href="#section-awards">À propos · Prix</a>
+        <a href="#section-studies">À propos · Études</a>
+        <a href="#section-collaborators">À propos · Collaborateurs</a>
+        <a href="#section-projects">Projets</a>
+        <a class="admin-nav__action" href="./index.html" target="_blank" rel="noopener noreferrer">Voir le site</a>
+        <button type="button" id="save-content" class="admin-nav__action">Enregistrer</button>
+      </nav>
+
+      <form id="cms-form" class="admin-form">
+        <section class="admin-section" id="section-typo">
+          <h2>Typographie</h2>
+          <label>
+            Taille grands titres (px)
+            <input name="typography.kickerSize" type="number" min="8" max="24" step="1" />
+          </label>
+          <p class="admin-help">
+            Grands titres: CHARLES GRENIER · RÉALISATEUR/MONTEUR · À PROPOS · SÉLECTIONS/TITRE PROJET/À PROPOS
+          </p>
+          <label>
+            Graisse grands titres
+            <select name="typography.kickerWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+          <label>
+            Taille petits titres (px)
+            <input name="typography.sectionTitleSize" type="number" min="8" max="32" step="1" />
+          </label>
+          <p class="admin-help">
+            Petits titres: RÉALISATIONS · MONTAGES · PRIX & DISTINCTIONS · ÉTUDES · AMIES & AMIS
+          </p>
+          <label>
+            Graisse petits titres
+            <select name="typography.sectionTitleWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+          <label>Taille texte courant (px)<input name="typography.bodySize" type="number" min="8" max="24" step="1" /></label>
+          <label>
+            Graisse texte
+            <select name="typography.bodyWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+          <label>Taille grand titre contenu (px)<input name="typography.titleSize" type="number" min="10" max="72" step="1" /></label>
+          <label>
+            Graisse grand titre contenu
+            <select name="typography.heroTitleWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+          <label>
+            Graisse titres d'oeuvres
+            <select name="typography.workTitleWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="admin-section" id="section-footer">
+          <h2>Bas de page</h2>
+          <label>Email<input name="sidebar.email" type="email" /></label>
+          <label>Email agente (MVA)<input name="sidebar.agentEmail" type="email" /></label>
+          <label>Instagram URL<input name="sidebar.instagram" type="url" /></label>
+          <label>Letterboxd URL<input name="sidebar.letterboxd" type="url" /></label>
+          <label>Lieu<input name="sidebar.location" type="text" /></label>
+          <label>Taille lieu (px)<input name="typography.locationSize" type="number" min="8" max="24" step="1" /></label>
+          <label>
+            Graisse bas de page
+            <select name="typography.footerWeight">
+              <option value="thin">Thin</option>
+              <option value="regular" selected>Regular</option>
+              <option value="bold">Bold</option>
+            </select>
+          </label>
+        </section>
+
+        <section class="admin-section" id="section-intro">
+          <h2>À propos · Texte principal</h2>
+          <label>Texte<textarea name="hero.text" rows="6"></textarea></label>
+          <p class="admin-help">Affiche le texte principal de la page À PROPOS. Formatage accepte : `*italique*` et `**gras**`.</p>
+        </section>
+
+        <section class="admin-section" id="section-awards">
+          <h2>À propos · Prix et distinctions</h2>
+          <label>Label<input name="awards.label" type="text" /></label>
+          <label>
+            Titres
+            <textarea
+              name="awards.items"
+              rows="6"
+              data-format="projects"
+            ></textarea>
+          </label>
+          <p class="admin-help">Affiche dans la page À PROPOS. Une ligne par entree : titre</p>
+        </section>
+
+        <section class="admin-section" id="section-studies">
+          <h2>À propos · Études</h2>
+          <label>Label<input name="studies.label" type="text" /></label>
+          <label>
+            Titres
+            <textarea
+              name="studies.items"
+              rows="6"
+              data-format="projects"
+            ></textarea>
+          </label>
+          <p class="admin-help">Affiche dans la page À PROPOS. Une ligne par entree : titre</p>
+        </section>
+
+        <section class="admin-section" id="section-collaborators">
+          <h2>À propos · Collaborateurs-ices & amis-es</h2>
+          <label>Label<input name="collaborators.label" type="text" /></label>
+          <label>
+            Titres
+            <textarea
+              name="collaborators.items"
+              rows="6"
+              data-format="projects"
+            ></textarea>
+          </label>
+          <p class="admin-help">Affiche dans la page À PROPOS. Une ligne par entree : nom | https://site.com (URL optionnelle)</p>
+        </section>
+
+        <section class="admin-section" id="section-projects">
+          <h2>Projets</h2>
+          <div class="admin-tabs" role="tablist" aria-label="Projets">
+            <button type="button" class="admin-tab is-active" data-project-tab="directing" role="tab" aria-selected="true">Realisation</button>
+            <button type="button" class="admin-tab" data-project-tab="editing" role="tab" aria-selected="false">Montage</button>
+          </div>
+
+          <div class="admin-tab-panel is-active" data-project-panel="directing" role="tabpanel">
+            <label>Label<input name="directing.label" type="text" /></label>
+            <div id="directing-editor" class="admin-project-list"></div>
+            <button type="button" id="add-directing-project">+ Ajouter un projet</button>
+            <p class="admin-help">Chaque projet : titre, background video, description, credits, video de presentation + option masquer/afficher. Utilise Drag pour reordonner.</p>
+          </div>
+
+          <div class="admin-tab-panel" data-project-panel="editing" role="tabpanel">
+            <label>Label<input name="editing.label" type="text" /></label>
+            <div id="editing-editor" class="admin-project-list"></div>
+            <button type="button" id="add-editing-project">+ Ajouter un projet</button>
+            <p class="admin-help">Chaque projet : titre, background video, description, credits, video de presentation + option masquer/afficher. Utilise Drag pour reordonner.</p>
+          </div>
+        </section>
+
+        <div class="admin-actions">
+          <p id="save-status" class="admin-status" aria-live="polite"></p>
+        </div>
+      </form>
+    </main>
+
+    <script src="./content.js?v=20260312-04"></script>
+    <script src="./admin.js?v=20260312-04"></script>
+  </body>
+</html>

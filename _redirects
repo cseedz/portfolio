@@ -1,0 +1,5 @@
+/videos/montages/publicites/* /videos/montages/spots/:splat 200
+/videos/montages/publicité/* /videos/montages/spots/:splat 200
+/videos/montages/publicite/* /videos/montages/spots/:splat 200
+/videos/montages/publicit%C3%A9/* /videos/montages/spots/:splat 200
+/videos/montages/Publicites/* /videos/montages/spots/:splat 200
