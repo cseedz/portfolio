@@ -1,8 +1,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Thin v2.6/PPMori-Thin.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Thin v2.6/PPMori-Thin.woff") format("woff");
+    url("./fonts/PPMori-Thin.woff2") format("woff2"),
+    url("./fonts/PPMori-Thin.woff") format("woff");
   font-weight: 100;
   font-style: normal;
 }
@@ -10,8 +10,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Thin v2.6/PPMori-Thin.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Thin v2.6/PPMori-Thin.woff") format("woff");
+    url("./fonts/PPMori-Thin.woff2") format("woff2"),
+    url("./fonts/PPMori-Thin.woff") format("woff");
   font-weight: 200;
   font-style: normal;
 }
@@ -19,8 +19,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Regular.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Regular.woff") format("woff");
+    url("./fonts/PPMori-Regular.woff2") format("woff2"),
+    url("./fonts/PPMori-Regular.woff") format("woff");
   font-weight: 400;
   font-style: normal;
 }
@@ -28,8 +28,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff") format("woff");
+    url("./fonts/PPMori-Bold.woff2") format("woff2"),
+    url("./fonts/PPMori-Bold.woff") format("woff");
   font-weight: 600;
   font-style: normal;
 }
@@ -37,8 +37,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff") format("woff");
+    url("./fonts/PPMori-Bold.woff2") format("woff2"),
+    url("./fonts/PPMori-Bold.woff") format("woff");
   font-weight: 700;
   font-style: normal;
 }
@@ -46,8 +46,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Bold.woff") format("woff");
+    url("./fonts/PPMori-Bold.woff2") format("woff2"),
+    url("./fonts/PPMori-Bold.woff") format("woff");
   font-weight: 900;
   font-style: normal;
 }
@@ -55,8 +55,8 @@
 @font-face {
   font-family: "PP Mori";
   src:
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Italic.woff2") format("woff2"),
-    url("./PP Mori - Free for Personal Use v2.6/PP Mori - Essentials v2.6/web/PPMori-Italic.woff") format("woff");
+    url("./fonts/PPMori-Italic.woff2") format("woff2"),
+    url("./fonts/PPMori-Italic.woff") format("woff");
   font-weight: 400;
   font-style: italic;
 }
