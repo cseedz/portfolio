@@ -1719,17 +1719,19 @@ function setupProjectPages(content) {
       sync().then(updateInlineControls).catch(() => {});
     });
     inlineVimeoPlayer.on("timeupdate", (event) => {
+      // Do NOT touch `playing` here: Vimeo can fire one last timeupdate right
+      // at the moment a pause takes effect, which would flip the button back
+      // to "Pause" right after the user clicked it, with nothing left to
+      // correct it since timeupdate stops firing once actually paused. The
+      // dedicated play/pause events (below) are the source of truth for
+      // playback state.
       updateInlineControls({
-        playing: true,
         current: event?.seconds || 0,
         duration: event?.duration || 0,
       });
     });
     inlineVimeoPlayer.on("volumechange", (event) => {
-      updateInlineControls({
-        playing: true,
-        muted: event?.muted ?? false,
-      });
+      updateInlineControls({ muted: event?.muted ?? false });
     });
 
     beginInlineProgressLoop(sync);
