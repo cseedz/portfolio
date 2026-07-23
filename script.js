@@ -500,6 +500,22 @@ let desktopChromeBound = false;
 let aboutOverlayBound = false;
 let projectInlineBound = false;
 let desktopHomeBound = false;
+// Hoisted to module scope (not re-declared per setupProjectPages() call):
+// the play/mute/fullscreen button listeners are bound exactly once, guarded
+// by projectInlineBound, but renderSite() itself runs at least twice on
+// every page load (once synchronously, again once the async cloud-content
+// fetch resolves and dispatches "cms:content-updated"). If these lived as
+// `let` locals inside setupProjectPages(), that second call would create a
+// brand new set of bindings that openInlineProject/setupInline*Controls
+// would update from then on — while the once-only click listeners would
+// keep reading the FIRST call's now-abandoned copies forever, so clicking
+// play/mute/fullscreen would silently do nothing (or, worse, only mutate
+// stray DOM text without ever calling the real player API).
+let inlineVimeoPlayer = null;
+let inlineProgressTimer = null;
+let inlinePlayerMode = "none";
+let inlineOpenRequestId = 0;
+let inlineUiState = { playing: false, muted: true, current: 0, duration: 0 };
 let lockedDirectorRole = null;
 let directorRoleAnimationTimer = null;
 let desktopLabelAnimationTimer = null;
@@ -1501,16 +1517,8 @@ function setupProjectPages(content) {
   const inlineFullscreenControl = inlineControls?.querySelector("[data-player-action='fullscreen']");
   const inlineProgressFill = inlineControls?.querySelector(".project-inline__progress-fill");
   let inlineCloseStateTimer = null;
-  let inlineVimeoPlayer = null;
-  let inlineProgressTimer = null;
-  let inlinePlayerMode = "none";
-  let inlineOpenRequestId = 0;
-  let inlineUiState = {
-    playing: false,
-    muted: true,
-    current: 0,
-    duration: 0,
-  };
+  // inlineVimeoPlayer / inlineProgressTimer / inlinePlayerMode / inlineOpenRequestId /
+  // inlineUiState live at module scope — see the comment there for why.
 
   const closeInlineProject = () => {
     if (!inline || !inlineVideo || !inlineEmbed) {
@@ -1842,6 +1850,19 @@ function setupProjectPages(content) {
         } else if (inlineControls) {
           inlineControls.classList.add("is-hidden");
         }
+      } else if (isDirectVideoUrl(project.presentationVideo)) {
+        // Full video hosted as a plain file (e.g. Supabase Storage): play it
+        // natively with the same custom controls used for the Vimeo path,
+        // instead of the generic "open in a new tab" link fallback below.
+        inlineExternal.style.display = "none";
+        inlineExternal.removeAttribute("href");
+        inlineExternal.textContent = "";
+        inlineVideo.style.display = "block";
+        inlineVideo.muted = true;
+        inlineVideo.src = toPlaybackUrl(project.presentationVideo);
+        inlineVideo.load();
+        setupInlineNativeVideoControls();
+        inlineVideo.play().catch(() => {});
       } else {
         const safePresentationLink = sanitizeExternalUrl(project.presentationVideo);
         if (!safePresentationLink) {
