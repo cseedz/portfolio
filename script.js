@@ -2012,6 +2012,11 @@ function setupProjectPages(content) {
   if (!projectInlineBound && inlineClose) {
     projectInlineBound = true;
     inlineClose.addEventListener("click", () => navigateHome());
+    // Both buttons update the icon immediately from the UI's own tracked
+    // state, then fire the Vimeo API call in the background. Waiting on the
+    // postMessage round-trip before updating the icon is what made the
+    // button look "stuck" whenever that round-trip was slow or never
+    // resolved (flaky network, blocked embed, ad/privacy blocker).
     inlinePlayControl?.addEventListener("click", () => {
       if (inlinePlayerMode === "video") {
         if (inlineVideo.paused || inlineVideo.ended) {
@@ -2023,10 +2028,9 @@ function setupProjectPages(content) {
       }
 
       if (inlinePlayerMode === "vimeo" && inlineVimeoPlayer) {
-        inlineVimeoPlayer
-          .getPaused()
-          .then((paused) => (paused ? inlineVimeoPlayer.play() : inlineVimeoPlayer.pause()))
-          .catch(() => {});
+        const nextPlaying = !inlineUiState.playing;
+        updateInlineControls({ playing: nextPlaying });
+        (nextPlaying ? inlineVimeoPlayer.play() : inlineVimeoPlayer.pause()).catch(() => {});
       }
     });
 
@@ -2043,16 +2047,9 @@ function setupProjectPages(content) {
       }
 
       if (inlinePlayerMode === "vimeo" && inlineVimeoPlayer) {
-        inlineVimeoPlayer
-          .getMuted()
-          .then((muted) => inlineVimeoPlayer.setMuted(!muted))
-          .then(() =>
-            Promise.all([inlineVimeoPlayer.getPaused(), inlineVimeoPlayer.getCurrentTime(), inlineVimeoPlayer.getDuration(), inlineVimeoPlayer.getMuted()]),
-          )
-          .then(([paused, current, duration, muted]) =>
-            updateInlineControls({ playing: !paused, muted, current, duration }),
-          )
-          .catch(() => {});
+        const nextMuted = !inlineUiState.muted;
+        updateInlineControls({ muted: nextMuted });
+        inlineVimeoPlayer.setMuted(nextMuted).catch(() => {});
       }
     });
 
